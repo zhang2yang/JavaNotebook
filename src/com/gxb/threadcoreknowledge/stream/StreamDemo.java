@@ -24,6 +24,7 @@ public class StreamDemo {
         List<User> list = Arrays.asList(user1,user2,user3,user4,user5);
 
         list.stream().filter(user -> user.getId() % 2 == 0).filter(user -> user.getAge() > 24).map(user -> user.getUsername().toUpperCase()).sorted(Comparator.reverseOrder()).limit(1).collect(Collectors.toList()).forEach(System.out::println);
+
     }
 }
 
