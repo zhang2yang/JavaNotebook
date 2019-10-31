@@ -15,7 +15,6 @@ public class SingletonDemo {
 class SingletonDCL {
 
     private SingletonDCL() {
-        System.out.println("\t单例模式的对象已经被初始化");
     }
 
     private static volatile SingletonDCL singleton = null;
