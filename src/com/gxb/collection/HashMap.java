@@ -31,7 +31,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
     @Override
     public V get(K k) {
-        if (size == 0 || k == null) {
+        if (k == null && this.size == 0) {
             return null;
         }
         int index = hash(k);
@@ -39,9 +39,9 @@ public class HashMap<K,V> implements Map<K,V> {
         return entry == null ? null : entry.getValue();
     }
 
-    private Node<K,V> getEntry(K k, int index) {
+    private Node<K,V> getEntry(K k,int index) {
         for (Node<K,V> node = table[index]; node != null; node = node.next) {
-            if ((node.key == k || k.equals(node.getKey())) && node.hash == index) {
+            if ((node.key == k && node.equals(k)) || node.hash == index) {
                 return node;
             }
         }
@@ -63,12 +63,10 @@ public class HashMap<K,V> implements Map<K,V> {
 
     private static class Node<K,V> implements Map.Entry {
 
-        K key;
-        V value;
-        int hash;
-        Node<K,V> next;
-
-        private Node() {}
+        private K key;
+        private V value;
+        private int hash;
+        private Node<K,V> next;
 
         private Node(K key, V value, int hash, Node<K, V> next) {
             this.key = key;
@@ -79,12 +77,12 @@ public class HashMap<K,V> implements Map<K,V> {
 
         @Override
         public K getKey() {
-            return key;
+            return this.key;
         }
 
         @Override
         public V getValue() {
-            return value;
+            return this.value;
         }
     }
 }
