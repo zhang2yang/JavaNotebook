@@ -55,16 +55,12 @@ public class ReadWriteLockDemo {
         MyCache cache = new MyCache();
         for (int i = 1; i <= 5; i++) {
             final int finalI = i;
-            new Thread(() -> {
-                cache.put(finalI + "",finalI + "");
-            },String.valueOf(i)).start();
+            new Thread(() -> cache.put(finalI + "",finalI + ""),String.valueOf(i)).start();
         }
 
         for (int i = 1; i <= 5; i++) {
             final int finalI = i;
-            new Thread(() -> {
-                cache.get(finalI + "");
-            },String.valueOf(i)).start();
+            new Thread(() -> cache.get(finalI + ""),String.valueOf(i)).start();
         }
     }
 }
