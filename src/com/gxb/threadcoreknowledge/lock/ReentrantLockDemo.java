@@ -44,8 +44,6 @@ class Phone implements Runnable{
             lock.unlock();
         }
     }
-
-
 }
 
 /**
