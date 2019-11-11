@@ -3,7 +3,8 @@ package com.gxb.threadcoreknowledge.juc;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-class Ticket { //资源类 = 实例变量 + 实例方法
+class Ticket {
+    //资源类 = 实例变量 + 实例方法
 
     private int number = 30;
 
