@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * 通过CAS操作完成自旋锁，A线程先进来调用myLock方法自己持有锁5秒钟，B随后进后发现
  * 当前线程持有锁，不是null，所以只能通过自旋等待，直到A释放锁后B随后发现
+ *
  */
 public class SpinLockDemo {
 
