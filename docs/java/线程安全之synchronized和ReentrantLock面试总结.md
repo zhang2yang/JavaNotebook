@@ -16,6 +16,7 @@ here](https://images.gitbook.cn/fa62f4a0-d506-11e9-b16d-918a441334dc)
 
 上面的内容没看明白没关系，下面来看非线程安全的具体代码：
 
+
     class ThreadSafeTest {
         static int number = 0;
         public static void main(String[] args) throws InterruptedException {
