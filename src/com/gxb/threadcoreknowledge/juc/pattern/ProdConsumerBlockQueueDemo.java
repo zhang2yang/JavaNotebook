@@ -5,15 +5,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
-/**
- * Description
- * volatile/CAS/atomicInteger/BlockQueue/线程交互/原子引用
- *
- * @author veliger@163.com
- * @version 1.0
- * @date 2019-04-13 14:02
- **/
 public class ProdConsumerBlockQueueDemo {
 
     static class MyResource {
