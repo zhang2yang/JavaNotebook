@@ -17,7 +17,7 @@ public class ProdConsumerBlockQueueDemo {
          */
         private AtomicInteger atomicInteger = new AtomicInteger();
 
-        private BlockingQueue<String> blockingQueue = null;
+        private BlockingQueue<String> blockingQueue;
 
         public MyResource(BlockingQueue<String> blockingQueue) {
             this.blockingQueue = blockingQueue;
@@ -37,7 +37,7 @@ public class ProdConsumerBlockQueueDemo {
                 }
                 TimeUnit.SECONDS.sleep(1);
             }
-            System.out.println(Thread.currentThread().getName() + "\t 停止 表示 flag" + flag);
+            System.out.println(Thread.currentThread().getName() + "\t 停止 表示 flag=" + flag);
         }
 
         public void myConsumer() throws Exception {
@@ -46,7 +46,7 @@ public class ProdConsumerBlockQueueDemo {
                 result = blockingQueue.poll(2L, TimeUnit.SECONDS);
                 if(null==result||"".equalsIgnoreCase(result)){
                     flag=false;
-                    System.out.println(Thread.currentThread().getName()+"\t"+"超过2m没有取到 消费退出");
+                    System.out.println(Thread.currentThread().getName()+"\t"+"超过2s没有取到 消费退出");
                     System.out.println();
                     System.out.println();
                     return;

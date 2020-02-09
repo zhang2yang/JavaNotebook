@@ -91,7 +91,7 @@ class SharingResource {
  * 4.标志位
  *
  */
-public class ThreadOrderAccess2 {
+public class  ThreadOrderAccess2 {
 
     public static void main(String[] args) {
         SharingResource sharedResource = new SharingResource();
