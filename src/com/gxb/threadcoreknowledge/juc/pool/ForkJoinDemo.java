@@ -12,7 +12,6 @@ class MyTask extends RecursiveTask<Integer> {
     private int end;
     private int result;
 
-
     public MyTask(int start, int end) {
         this.start = start;
         this.end = end;
@@ -25,7 +24,7 @@ class MyTask extends RecursiveTask<Integer> {
                 result += i;
             }
         }else {
-            Integer middle = (start + end) / 2;
+            int middle = (start + end) / 2;
             MyTask myTask1 = new MyTask(start,middle);
             MyTask myTask2 = new MyTask(middle + 1, end);
             myTask1.fork();
