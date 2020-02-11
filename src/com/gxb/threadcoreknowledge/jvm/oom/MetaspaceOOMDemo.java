@@ -1,8 +1,6 @@
 package com.gxb.threadcoreknowledge.jvm.oom;
 
-/**
- *
- */
+
 public class MetaspaceOOMDemo {
 
     static class OOMTest {

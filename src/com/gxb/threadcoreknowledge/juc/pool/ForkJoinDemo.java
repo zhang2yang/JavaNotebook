@@ -12,6 +12,7 @@ class MyTask extends RecursiveTask<Integer> {
     private int end;
     private int result;
 
+
     public MyTask(int start, int end) {
         this.start = start;
         this.end = end;
