@@ -1,6 +1,6 @@
 package com.gxb.threadcoreknowledge.jvm.gc;
 
-import java.util.Random;
+        import java.util.Random;
 
 /**
  * 1.-Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+PrintCommandLineFlags -XX:+UseSerialGC (defNew+Tenured)
