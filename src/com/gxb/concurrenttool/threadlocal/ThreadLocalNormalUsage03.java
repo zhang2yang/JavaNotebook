@@ -19,13 +19,19 @@ public class ThreadLocalNormalUsage03 {
     public String date(int seconds) {
         //参数的单位是毫秒
         Date date = new Date(1000 * seconds);
-        String result;
+        String result = null;
         // synchronized (ThreadLocalNormalUsage03.class) {
         //     result = format.format(date);
         // }
-        lock.lock();
-        result = format.format(date);
-        lock.unlock();
+        try {
+            lock.lock();
+            result = format.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+
         return result;
     }
 
