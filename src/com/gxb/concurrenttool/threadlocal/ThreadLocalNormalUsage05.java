@@ -29,6 +29,7 @@ public class ThreadLocalNormalUsage05 {
                 }).start();
             });
         }
+        threadPool.shutdown();
     }
 }
 
