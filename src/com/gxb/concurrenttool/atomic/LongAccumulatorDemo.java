@@ -20,7 +20,6 @@ public class LongAccumulatorDemo {
         IntStream.range(1,10).forEach(value -> executor.submit(() -> accumulator.accumulate(value)));
         executor.shutdown();
         while (!executor.isTerminated()) {
-
         }
         System.out.println(accumulator.getThenReset());
     }
