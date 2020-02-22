@@ -2,22 +2,41 @@ package com.gxb.concurrenttool.collections.predecessor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 描述：     演示Map的基本用法
  */
 public class MapDemo {
     public static void main(String[] args) {
-        Map<String, Integer> map = new HashMap<>();
-        System.out.println(map.isEmpty());
-        map.put("东哥", 38);
-        map.put("西哥", 28);
-        System.out.println(map.keySet());
-        System.out.println(map.get("西哥"));
-        System.out.println(map.size());
-        System.out.println(map.containsKey("东哥"));
-        map.remove("东哥");
-        System.out.println(map.containsKey("东哥"));
+        int hashCode = "gxb".hashCode();
+        System.out.println(hashCode);
+        int code = hashCode ^ (hashCode >>> 16);
+        System.out.println(code);
+    }
+}
 
+class Node {
+
+    private int hash;
+    private String key;
+    private String value;
+
+    public Node(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public int getHash() {
+        return hash;
+    }
+
+    public void setHash(int hash) {
+        this.hash = hash;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(key) ^ Objects.hashCode(value);
     }
 }
