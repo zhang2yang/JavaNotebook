@@ -7,7 +7,7 @@
     - [JVM](#JVM)
     - [MySQL](#MySQL)
     - [Redis](#Redis)
-    - [常用框架](#Framework)
+    - [常用框架](#常用框架)
     - [MQ](#MQ)
     - [数据结构和算法](#数据结构和算法)
     
@@ -57,7 +57,7 @@
 
 * [Redis面试汇总](docs/java/Redis/033--Redis面试题汇总.md)
 
-### Framework
+### 常用框架
 
 * [Spring核心组件面试汇总](docs/java/framework/025--Spring核心功能演示+面试题.md)
 * [SpringMVC核心组件面试汇总](docs/java/framework/026--SpringMVC核心组件+面试题.md)
