@@ -54,6 +54,7 @@ war 包，放入 Tomcat 等 Web 容器中就可以正常运行了，但你有没
 
 Java 程序执行流程图如下：
 
+
 ![avatar](https://images.gitbook.cn/FvSP3G2xXR676FoIvsz-0naYLP2I)
 
 ### Java 虚拟机是如何判定热点代码的？
