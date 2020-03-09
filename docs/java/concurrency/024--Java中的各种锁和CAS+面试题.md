@@ -48,9 +48,8 @@ ReentrantLock 提供了公平锁和非公平锁的实现。
 
 ReentrantReadWriteLock 共享锁演示代码如下：
 
-
-​    
-    public class ReadWriteLockTest {
+```java
+public class ReadWriteLockTest {
         public static void main(String[] args) throws InterruptedException {
             final MyReadWriteLock rwLock = new MyReadWriteLock();
             // 创建读锁 r1 和 r2
@@ -113,6 +112,7 @@ ReentrantReadWriteLock 共享锁演示代码如下：
             }
         }
     }
+```
 
 
 以上程序执行结果如下：
