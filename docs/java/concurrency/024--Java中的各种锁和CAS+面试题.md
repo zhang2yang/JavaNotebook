@@ -77,12 +77,7 @@ public class ReadWriteLockTest {
                     rwLock.write();
                 }
             }, "w1").start();
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    rwLock.write();
-                }
-            }, "w2").start();
+            new Thread(()-> rwLock.write(), "w2").start();
         }
         static class MyReadWriteLock {
             ReadWriteLock lock = new ReentrantReadWriteLock();
