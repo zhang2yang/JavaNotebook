@@ -1,7 +1,5 @@
 package com.gxb.threadcoreknowledge.aqs;
 
-import sun.misc.GC;
-
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
