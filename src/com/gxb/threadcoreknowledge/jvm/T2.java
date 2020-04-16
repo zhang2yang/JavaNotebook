@@ -8,12 +8,8 @@ public class T2 {
         // System.out.println("-Xmx:MAX_MEMORY: = " + (double)maxMemory / 1024 / 1024 + "MB");
         // System.out.println("-Xms:TOTAL_MEMORY: = " + (double)totalMemory / 1024 / 1024 + "MB");
         // byte[] bytes = new byte[40 * 1024 * 1024];
-
         Integer a = 10000;
         Integer b = 10000;
         System.out.println(a==b);
-
     }
-
-
 }

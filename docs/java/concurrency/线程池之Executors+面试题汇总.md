@@ -1,5 +1,4 @@
-
-## 线程池之 Executors + 面试题
+## 线程池之 Executors解析
 
 线程池的创建分为两种方式：ThreadPoolExecutor 和 Executors，上一节学习了 ThreadPoolExecutor
 的使用方式，本节重点来看 Executors 是如何创建线程池的。  
@@ -18,31 +17,29 @@ Executors 可以创建以下六种线程池。
 
 创建固定个数的线程池，具体示例如下：
 
-    
-    
-    ExecutorService fixedThreadPool = Executors.newFixedThreadPool(2);
-    for (int i = 0; i < 3; i++) {
-        fixedThreadPool.execute(() -> {
-            System.out.println("CurrentTime - " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-    
+```java
+ExecutorService fixedThreadPool = Executors.newFixedThreadPool(2);
+for (int i = 0; i < 3; i++) {
+    fixedThreadPool.execute(() -> {
+        System.out.println("CurrentTime - " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    });
+}
+```
+
+
+
 
 以上程序执行结果如下：
 
 > CurrentTime - 2019-06-27 20:58:58
-
 >
-
 > CurrentTime - 2019-06-27 20:58:58
-
 >
-
 > CurrentTime - 2019-06-27 20:58:59
 
 根据执行结果可以看出，newFixedThreadPool(2) 确实是创建了两个线程，在执行了一轮（2 次）之后，停了一秒，有了空闲线程，才执行第三次。
@@ -51,60 +48,45 @@ Executors 可以创建以下六种线程池。
 
 根据实际需要自动创建带缓存功能的线程池，具体代码如下：
 
-    
-    
-    ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-    for (int i = 0; i < 10; i++) {
-        cachedThreadPool.execute(() -> {
-            System.out.println("CurrentTime - " +
-                               LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-    
+
+```java
+ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+for (int i = 0; i < 10; i++) {
+    cachedThreadPool.execute(() -> {
+        System.out.println("CurrentTime - " +
+                           LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    });
+}
+```
+
+
+
 
 以上程序执行结果如下：
 
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
-
 >
-
 > CurrentTime - 2019-06-27 21:24:46
 
 根据执行结果可以看出，newCachedThreadPool 在短时间内会创建多个线程来处理对应的任务，并试图把它们进行缓存以便重复使用。
@@ -113,53 +95,52 @@ Executors 可以创建以下六种线程池。
 
 创建单个线程的线程池，具体代码如下：
 
-    
-    
-    ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-    for (int i = 0; i < 3; i++) {
-        singleThreadExecutor.execute(() -> {
-            System.out.println("CurrentTime - " +
-                               LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-    
+ ```java
+ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+for (int i = 0; i < 3; i++) {
+    singleThreadExecutor.execute(() -> {
+        System.out.println("CurrentTime - " +
+                           LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 	HH:mm:ss")));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    });
+}
+ ```
+
+
+
 
 以上程序执行结果如下：
 
 > CurrentTime - 2019-06-27 21:43:34
-
 >
-
 > CurrentTime - 2019-06-27 21:43:35
-
 >
-
 > CurrentTime - 2019-06-27 21:43:36
 
 ### ScheduledThreadPool 使用
 
 创建一个可以执行周期性任务的线程池，具体代码如下：
 
-    
-    
-    ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(2);
-    scheduledThreadPool.schedule(() -> {
-        System.out.println("ThreadPool：" + LocalDateTime.now());
-    }, 1L, TimeUnit.SECONDS);
-    System.out.println("CurrentTime：" + LocalDateTime.now());
-    
+
+```java
+ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(2);
+scheduledThreadPool.schedule(() -> {
+    System.out.println("ThreadPool：" + LocalDateTime.now());
+}, 1L, TimeUnit.SECONDS);
+System.out.println("CurrentTime：" + LocalDateTime.now());
+```
+
+
+
 
 以上程序执行结果如下：
 
 > CurrentTime：2019-06-27T21:54:21.881
-
 >
-
 > ThreadPool：2019-06-27T21:54:22.845
 
 根据执行结果可以看出，我们设置的 1 秒后执行的任务生效了。
@@ -168,49 +149,49 @@ Executors 可以创建以下六种线程池。
 
 创建一个可以执行周期性任务的单线程池，具体代码如下：
 
-    
-    
-    ScheduledExecutorService singleThreadScheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    singleThreadScheduledExecutor.schedule(() -> {
-        System.out.println("ThreadPool：" + LocalDateTime.now());
-    }, 1L, TimeUnit.SECONDS);
-    System.out.println("CurrentTime：" + LocalDateTime.now());
-    
+
+```java
+ScheduledExecutorService singleThreadScheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+
+singleThreadScheduledExecutor.schedule(() -> {
+    System.out.println("ThreadPool：" + LocalDateTime.now());
+}, 1L, TimeUnit.SECONDS);
+
+System.out.println("CurrentTime：" + LocalDateTime.now());
+```
+
+
+
 
 ### WorkStealingPool 使用
 
 Java 8 新增的创建线程池的方式，可根据当前电脑 CPU 处理器数量生成相应个数的线程池，使用代码如下：
 
-    
-    
-    ExecutorService workStealingPool = Executors.newWorkStealingPool();
-    for (int i = 0; i < 5; i++) {
-        int finalNumber = i;
-        workStealingPool.execute(() -> {
-            System.out.println("I：" + finalNumber);
-        });
-    }
-    Thread.sleep(5000);
-    
+
+```java
+ExecutorService workStealingPool = Executors.newWorkStealingPool();
+for (int i = 0; i < 5; i++) {
+    int finalNumber = i;
+    workStealingPool.execute(() -> {
+        System.out.println("I：" + finalNumber);
+    });
+}
+Thread.sleep(5000);
+```
+
+
+
 
 以上程序执行结果如下：
 
 > I：0
-
 >
-
 > I：3
-
 >
-
 > I：2
-
 >
-
 > I：1
-
 >
-
 > I：4
 
 根据执行结果可以看出，newWorkStealingPool 是并行处理任务的，并不能保证执行顺序。
@@ -223,27 +204,13 @@ Executors 提供了更多的线程池类型（6 种），但很不幸的消息�
 无独有偶《阿里巴巴 Java 开发手册》中对于线程池的创建也是这样规定的，内容如下：
 
 > 线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor
-的方式，这样的处理方式让写的读者更加明确线程池的运行规则，规避资源耗尽的风险。
-
+> 的方式，这样的处理方式让写的读者更加明确线程池的运行规则，规避资源耗尽的风险。
 >
-
 > 说明：Executors 返回的线程池对象的弊端如下：
-
 >
-
-> 1）FixedThreadPool 和 SingleThreadPool:
-
+> 1）FixedThreadPool 和 SingleThreadPool:允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。
 >
-
-> 允许的请求队列长度为 Integer.MAX_VALUE，可能会堆积大量的请求，从而导致 OOM。
-
->
-
-> 2）CachedThreadPool 和 ScheduledThreadPool:
-
->
-
-> 允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。
+> 2）CachedThreadPool 和 ScheduledThreadPool:允许的创建线程数量为 Integer.MAX_VALUE，可能会创建大量的线程，从而导致 OOM。
 
 OOM 是 OutOfMemoryError 的缩写，指内存溢出的意思。
 
@@ -251,62 +218,61 @@ OOM 是 OutOfMemoryError 的缩写，指内存溢出的意思。
 
 我们先来看一个简单的例子：
 
-    
-    
-    ExecutorService maxFixedThreadPool =  Executors.newFixedThreadPool(10);
-    for (int i = 0; i < Integer.MAX_VALUE; i++) {
-        maxFixedThreadPool.execute(()->{
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-    
+
+```java
+ExecutorService maxFixedThreadPool =  Executors.newFixedThreadPool(10);
+for (int i = 0; i < Integer.MAX_VALUE; i++) {
+    maxFixedThreadPool.execute(()->{
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    });
+}
+```
+
+
+
 
 之后设置 JVM（Java 虚拟机）的启动参数： `-Xmx10m -Xms10m` （设置 JVM 最大运行内存等于 10M）运行程序，会抛出 OOM
 异常，信息如下：
 
 > Exception in thread "main" java.lang.OutOfMemoryError: GC overhead limit
-exceeded
-
+> exceeded
 >
-
 > at
-java.util.concurrent.LinkedBlockingQueue.offer(LinkedBlockingQueue.java:416)
-
+> java.util.concurrent.LinkedBlockingQueue.offer(LinkedBlockingQueue.java:416)
 >
-
 > at
-java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1371)
-
+> java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1371)
 >
-
 > at xxx.main(xxx.java:127)
 
 #### 为什么 Executors 会存在 OOM 的缺陷？
 
 通过以上代码，找到了 FixedThreadPool 的源码，代码如下：
 
-    
-    
-    public static ExecutorService newFixedThreadPool(int nThreads) {
-            return new ThreadPoolExecutor(nThreads, nThreads,
-                                          0L, TimeUnit.MILLISECONDS,
-                                          new LinkedBlockingQueue<Runnable>());
-    }
-    
+
+```java
+public static ExecutorService newFixedThreadPool(int nThreads) {
+    return new ThreadPoolExecutor(nThreads, nThreads,
+                                  0L, TimeUnit.MILLISECONDS,
+                                  new LinkedBlockingQueue<Runnable>());
+}
+```
+
 
 可以看到创建 FixedThreadPool 使用了 LinkedBlockingQueue 作为任务队列，继续查看 LinkedBlockingQueue
 的源码就会发现问题的根源，源码如下：
 
-    
-    
-    public LinkedBlockingQueue() {
-        this(Integer.MAX_VALUE);
-    }
-    
+
+```java
+public LinkedBlockingQueue() {
+    this(Integer.MAX_VALUE);
+}
+```
+
 
 当使用 LinkedBlockingQueue 并没有给它指定长度的时候，默认长度为
 Integer.MAX_VALUE，这样就会导致程序会给线程池队列添加超多个任务，因为任务量太大就有造成 OOM 的风险。
@@ -315,8 +281,10 @@ Integer.MAX_VALUE，这样就会导致程序会给线程池队列添加超多个
 
 #### 1.以下程序会输出什么结果？
 
-    
-    
+
+```java
+
+class Test {
     public static void main(String[] args) {
         ExecutorService workStealingPool = Executors.newWorkStealingPool();
         for (int i = 0; i < 5; i++) {
@@ -326,7 +294,16 @@ Integer.MAX_VALUE，这样就会导致程序会给线程池队列添加超多个
             });
         }
     }
-    
+}
+
+
+
+
+
+```
+
+
+
 
 A：不输出任何结果  
 B：输出 0 到 9 有序数字  
@@ -367,15 +344,18 @@ ThreadPoolExecutor 实现的。
 
 newFixedThreadPool 的实现源码如下：
 
-    
-    
-    public static ExecutorService newFixedThreadPool(int nThreads, ThreadFactory threadFactory) {
-        return new ThreadPoolExecutor(nThreads, nThreads,
-                                      0L, TimeUnit.MILLISECONDS,
-                                      new LinkedBlockingQueue<Runnable>(),
-                                      threadFactory);
-    }
-    
+
+```java
+public static ExecutorService newFixedThreadPool(int nThreads, ThreadFactory threadFactory) {
+    return new ThreadPoolExecutor(nThreads, nThreads,
+                                  0L, TimeUnit.MILLISECONDS,
+                                  new LinkedBlockingQueue<Runnable>(),
+                                  threadFactory);
+}
+```
+
+
+
 
 #### 7.单线程的线程池存在的意义是什么？
 
@@ -392,9 +372,5 @@ Executors 返回线程池的缺点如下：
 
 ### 总结
 
-Executors 可以创建 6 种不同类型的线程池，其中 newFixedThreadPool()
-适合执行单位时间内固定的任务数，newCachedThreadPool() 适合短时间内处理大量任务，newSingleThreadExecutor() 和
-newSingleThreadScheduledExecutor() 为单线程线程池，而
-newSingleThreadScheduledExecutor() 可以执行周期性的任务，是 newScheduledThreadPool(n)
-的单线程版本，而 newWorkStealingPool() 为 JDK 8 新增的并发线程池，可以根据当前电脑的 CPU
-处理数量生成对比数量的线程池，但它的执行为并发执行不能保证任务的执行顺序。
+Executors 可以创建 6 种不同类型的线程池，其中 newFixedThreadPool()适合执行单位时间内固定的任务数，newCachedThreadPool() 适合短时间内处理大量任务，newSingleThreadExecutor() 和
+newSingleThreadScheduledExecutor() 为单线程线程池，而newSingleThreadScheduledExecutor() 可以执行周期性的任务，是 newScheduledThreadPool(n)的单线程版本，而 newWorkStealingPool() 为 JDK 8 新增的并发线程池，可以根据当前电脑的 CPU处理数量生成对比数量的线程池，但它的执行为并发执行不能保证任务的执行顺序。
