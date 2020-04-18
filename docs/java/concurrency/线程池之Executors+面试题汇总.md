@@ -283,23 +283,15 @@ Integer.MAX_VALUE，这样就会导致程序会给线程池队列添加超多个
 
 
 ```java
-
-class Test {
-    public static void main(String[] args) {
-        ExecutorService workStealingPool = Executors.newWorkStealingPool();
-        for (int i = 0; i < 5; i++) {
-            int finalNumber = i;
-            workStealingPool.execute(() -> {
-                System.out.print(finalNumber);
-            });
-        }
+public static void main(String[] args) {
+    ExecutorService workStealingPool = Executors.newWorkStealingPool();
+    for (int i = 0; i < 5; i++) {
+        int finalNumber = i;
+        workStealingPool.execute(() -> {
+            System.out.print(finalNumber);
+        });
     }
 }
-
-
-
-
-
 ```
 
 

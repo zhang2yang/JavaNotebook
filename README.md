@@ -38,11 +38,12 @@
 
 * [Java并发多线程常见面试题总结](docs/java/concurrency/线程相关面试题.md)
 * [线程安全之synchronized和ReentrantLock面试总结](docs/java/concurrency/线程安全之synchronized和ReentrantLock面试总结.md)
-* [Java线程池ThreadPoolExecutor的相关面试题总结](docs/java/concurrency/线程池相关面试汇总.md)
-* [Java线程池之Executors工具类面试题总结](docs/java/concurrency/线程池之Executors+面试题汇总.md)
-* [ThreadLocl的使用](docs/java/concurrency/021--ThreadLocal有什么用+面试题.md)
+* [线程池ThreadPoolExecutor解析](docs/java/concurrency/线程池相关面试汇总.md)
+* [线程池之Executors解析](docs/java/concurrency/线程池之Executors+面试题汇总.md)
+* [ThreadLocl的使用解析](docs/java/concurrency/021--ThreadLocal有什么用+面试题.md)
 * [JUC中的高级工具](docs/java/concurrency/023--Java并发包中的高级同步工具+面试题.md)
 * [Java中的CAS和各种锁](docs/java/concurrency/024--Java中的各种锁和CAS+面试题.md)
+* [常用的并发工具类](docs/java/concurrency/常用的并发工具类.md)
 
 ### JVM
 
