@@ -11,5 +11,6 @@ public class T2 {
         Integer a = 10000;
         Integer b = 10000;
         System.out.println(a==b);
+
     }
 }

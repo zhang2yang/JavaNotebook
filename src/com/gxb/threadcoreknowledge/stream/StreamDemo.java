@@ -1,9 +1,8 @@
 package com.gxb.threadcoreknowledge.stream;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *按照给出数据，找出同时满足以下条件的用户，也即以下条件全部满足
@@ -15,6 +14,44 @@ import java.util.stream.Collectors;
 public class StreamDemo {
 
     public static void main(String[] args) {
+        // stream();
+        // streamParallel();
+        streamSingleThreadAndMultiThread();
+    }
+
+    private static void streamSingleThreadAndMultiThread() {
+        System.out.println(String.format("本计算机的核数：%d", Runtime.getRuntime().availableProcessors()));
+
+        // 产生100w个随机数(1 ~ 100)，组成列表
+        Random random = new Random();
+        List<Integer> list = new ArrayList<>(1000_0000);
+
+        for (int i = 0; i < 10000000; i++) {
+            list.add(random.nextInt(100));
+        }
+
+        long prevTime = getCurrentTime();
+        list.stream().reduce((a, b) -> a + b).ifPresent(System.out::println);
+        System.out.println(String.format("单线程计算耗时：%d", getCurrentTime() - prevTime));
+
+        prevTime = getCurrentTime();
+        list.stream().parallel().reduce((a, b) -> a + b).ifPresent(System.out::println);
+        System.out.println(String.format("多线程计算耗时：%d", getCurrentTime() - prevTime));
+
+    }
+
+    private static long getCurrentTime() {
+        return System.currentTimeMillis();
+    }
+
+    private static void streamParallel() {
+        Stream.of(1,2,3,4,5,6,7,8,9,10).parallel().reduce((a, b) -> {
+            System.out.println(String.format("%s:%d + %d = %d", Thread.currentThread().getName(),a,b,a+b));
+            return a + b;
+        }).ifPresent(sum -> System.out.println("sum:" + sum));
+    }
+
+    private static void stream() {
         User user1 = new User(11,"a",23);
         User user2 = new User(12,"b",24);
         User user3 = new User(13,"c",22);
